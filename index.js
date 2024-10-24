@@ -2,7 +2,8 @@ const axios = require('axios');
 require('source-map-support/browser-source-map-support.js');
 
 class ErrorMonitor {
-  static #APIendpoint = 'http://localhost:8000'; // Change to where the lambda runs
+  // static #APIendpoint = 'http://localhost:8000'; // Change to where the lambda runs
+  static #APIendpoint = 'https://jvcrh631c5.execute-api.us-east-1.amazonaws.com/dev'
 
   constructor(projectID) {
     this.projectID = projectID; // TODO: needs to be generated and given to the user
@@ -49,7 +50,7 @@ class ErrorMonitor {
     }
 
     console.log('[error sdk] Sending error to backend...');
-    const response = await axios.post(`${ErrorMonitor.#APIendpoint}/api/errors`, data);
+    const response = await axios.post(`${ErrorMonitor.#APIendpoint}/api/errors`, { data });
     console.log('[error sdk]', response.status, response.data.message );
   }
 }
